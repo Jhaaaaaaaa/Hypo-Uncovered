@@ -1,3 +1,5 @@
+/* =============================== */
+/* General Body & Screens */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -11,7 +13,8 @@ body {
 .screen { display: none; width: 100vw; height: 100vh; }
 .screen.active { display: flex; justify-content: center; align-items: center; position: relative; }
 
-/* --- Menu Container --- */
+/* =============================== */
+/* Menu Container */
 .menu-container {
   text-align: center;
   padding: 40px 30px;
@@ -19,45 +22,75 @@ body {
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   animation: bounceIn 1s ease-out;
+  position: relative; /* for QR absolute positioning */
 }
 
-.menu-title { font-size: 3rem; margin: 0 0 10px 0; animation: floatText 3s ease-in-out infinite; }
-.menu-subtitle { font-size: 1.3rem; margin-bottom: 30px; animation: fadeIn 2s ease forwards; }
-
-.menu-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-.btn-animated { animation: pulseBtn 2s infinite; transition: transform 0.3s; }
-.btn-animated:hover { transform: scale(1.15); }
-
-/* Sidebar */
-.sidebar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 150px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 60px 10px;
-  background: linear-gradient(to bottom, #43cea2, #185a9d);
+.menu-title { 
+  font-size: 3rem; 
+  margin: 0 0 10px 0; 
+  animation: floatText 3s ease-in-out infinite; 
 }
 
+.menu-subtitle { 
+  font-size: 1.3rem; 
+  margin-bottom: 30px; 
+  animation: fadeIn 2s ease forwards; 
+}
+
+.menu-buttons { 
+  display: flex; 
+  justify-content: center; 
+  gap: 15px; 
+  flex-wrap: wrap; 
+}
+
+/* =============================== */
+/* Buttons */
 .btn {
-  padding: 10px 20px;
+  padding: 12px 28px;
   border: none;
-  border-radius: 8px;
-  background: #667eea;
-  color: #fff;
-  cursor: pointer;
+  border-radius: 12px;
   font-weight: 600;
-  transition: transform 0.2s, background 0.3s;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:hover {
-  transform: scale(1.05);
-  background: #764ba2;
+  transform: scale(1.1);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
 }
 
+.btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+}
+
+.btn:hover::before {
+  top: -30%;
+  left: -30%;
+  width: 260%;
+  height: 260%;
+}
+
+.btn-animated {
+  animation: pulseBtn 2s infinite;
+}
+
+/* =============================== */
+/* Top Bar */
 .top-bar {
   position: absolute;
   top: 0;
@@ -72,12 +105,15 @@ body {
   z-index: 200;
 }
 
+/* =============================== */
+/* Main interface background */
 #main-interface {
   background: url('https://i.pinimg.com/1200x/1a/1a/16/1a1a1681f482282a1803d9bcd27cb706.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* --- Slider --- */
+/* =============================== */
+/* Slider */
 .slider-wrapper {
   position: relative;
   width: 100%;
@@ -89,7 +125,12 @@ body {
   margin-top: 60px;
 }
 
-.slider { display: flex; gap: 20px; transition: transform 0.5s ease; height: 100%; }
+.slider { 
+  display: flex; 
+  gap: 20px; 
+  transition: transform 0.5s ease; 
+  height: 100%; 
+}
 
 .slide {
   flex: 0 0 calc((100% - 40px)/3);
@@ -147,6 +188,7 @@ body {
   .slide { flex: 0 0 90%; height: 300px; }
 }
 
+/* =============================== */
 /* Animations */
 @keyframes floatText {
   0%,100% { transform: translateY(0); }
@@ -155,7 +197,7 @@ body {
 
 @keyframes pulseBtn {
   0%,100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.08); }
 }
 
 @keyframes bounceIn {
@@ -170,6 +212,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* =============================== */
 /* Background Animation */
 .background-animation {
   position: absolute;
@@ -190,51 +233,7 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Topic Cards */
-.topic-cards-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-
-.topic-card {
-  width: 180px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  overflow: hidden;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: slideInUp 1s ease forwards;
-}
-
-.topic-card img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-}
-
-.topic-card p {
-  margin: 10px 0;
-  font-weight: 600;
-  color: #fff;
-}
-
-.topic-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-}
-
-@keyframes slideInUp {
-  0% { opacity: 0; transform: translateY(50px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
+/* =============================== */
 /* Floating sparkles */
 .sparkle, .floating-circle {
   position: absolute;
@@ -262,56 +261,21 @@ body {
   100% { transform: translateY(-100px) translateX(-10px); opacity: 0; }
 }
 
-/* ======================================== */
-/* --- QR CODE STYLING (ADDED) --- */
-/* ======================================== */
-
-.qr-section {
-  margin-top: 20px;
-  background: rgba(255,255,255,0.15);
-  padding: 12px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+/* =============================== */
+/* Small QR code inside menu container */
+.qr-container {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 8vw;       /* scales on mobile */
+  min-width: 40px;
+  max-width: 70px;
+  z-index: 100;
 }
 
-.qr-label {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-.qr-image {
-  width: 120px;
-  height: 120px;
-  background: #fff;
-  padding: 5px;
-  border-radius: 6px;
-}
-
-
-/* --- QR CODE STYLING --- */
-.qr-section {
-  margin-top: 20px;
-  background: rgba(255,255,255,0.15);
-  padding: 12px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-
-.qr-label {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-.qr-image {
-  width: 120px;
-  height: 120px;
-  background: #fff;
-  padding: 5px;
-  border-radius: 6px;
+.qr-container .qr-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }

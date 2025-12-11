@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     start: document.getElementById('start-btn'),
     explore: document.getElementById('explore-btn'),
     random: document.getElementById('random-btn'),
-    menu: document.getElementById('menu-btn'),
-    navMain: document.getElementById('nav-main')
+    menu: document.getElementById('menu-btn')
   };
 
   const slider = document.getElementById('slider');
@@ -36,8 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSlider();
   };
 
-  btns.menu.onclick = () => { screens.main.classList.remove('active'); screens.menu.classList.add('active'); };
-  btns.navMain.onclick = () => { screens.menu.classList.remove('active'); screens.main.classList.add('active'); };
+  btns.menu.onclick = () => {
+    screens.main.classList.remove('active');
+    screens.menu.classList.add('active');
+  };
 
   // --- Update slider ---
   function updateSlider() {
@@ -101,19 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSlider();
   };
 
-  // --- Topic card click ---
-  const topicCards = document.querySelectorAll('.topic-card');
-  topicCards.forEach(card => {
-    card.onclick = () => {
-      const slideIndex = parseInt(card.getAttribute('data-slide'));
-      screens.menu.classList.remove('active');
-      screens.main.classList.add('active');
-      index = slideIndex;
-      enlargedSlide = null;
-      updateSlider();
-    };
-  });
-
   // --- Floating sparkles ---
   const menuScreen = document.getElementById('menu-screen');
   for (let i=0; i<30; i++) {
@@ -137,28 +125,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('resize', updateSlider);
   updateSlider();
-
-  // --------------------------------------------------------
-  // --- QR CODE GENERATOR LOGIC (Sidebar)
-  // --------------------------------------------------------
-  const qrBtn = document.getElementById("genQR");
-  const qrText = document.getElementById("qrText");
-  const qrResult = document.getElementById("qrResult");
-
-  qrBtn.onclick = () => {
-    const value = qrText.value.trim();
-    qrResult.innerHTML = ""; // clear old
-
-    if (value === "") {
-      alert("Please enter text or a URL");
-      return;
-    }
-
-    new QRCode(qrResult, {
-      text: value,
-      width: 130,
-      height: 130
-    });
-  };
-
 });
